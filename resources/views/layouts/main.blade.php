@@ -16,59 +16,34 @@
     <link rel="stylesheet" href="{{ asset('assets/css/Pretty-Registration-Form.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Responsive-Form-1.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Responsive-Form.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Table-With-Search-1.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/Table-With-Search.css') }}">
 </head>
 
 <body id="page-top">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <img class="img-fluid" src="{{ asset('assets/img/Logo%20Klinik%20Berkah%20fix.jpg') }}" style="width: 50px;height: 50px;margin: 5px;">
-                Klinik Berkah Abadi Medika
-            </a>
-            <button data-toggle="collapse" data-target="#navbarResponsive"
-                class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top"><img class="img-fluid" src="{{ asset('assets/img/Logo%20Klinik%20Berkah%20fix.jpg') }}" style="width: 50px;height: 50px;margin: 5px;">KLINIK BERKAH ABADI MEDIKA</a><button data-toggle="collapse" data-target="#navbarResponsive"
+                class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse"
+                id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ route('home') }}">Home</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <section id="portfolio" class="portfolio">
-        <div class="container full-height">
-            <div class="row register-form">
-                <div class="col">
-                    <form method="POST" action="{{ route('login') }}" class="custom-form" style="background-color: rgb(249,247,247);margin-right: 250px;margin-left: 250px;margin-top: 40px;">
-                        @csrf
-                        <img class="img-fluid" src="{{ asset('assets/img/Logo%20Klinik%20Berkah%20fix.jpg') }}" style="width: 50px;height: 50px;margin: 5px;">
-                        <h1>Login</h1>
-                        @if($errors->has('username'))
-                            <span class="badge badge-danger mt-2">Login gagal, Username atau Password Salah.</span>
-                            <br>
-                        @endif
-                        <div class="form-row form-group">
-                            <div class="col-sm-4 label-column">
-                                <label class="col-form-label" for="email-input-field">Username</label>
-                            </div>
-                            <div class="col-sm-6 input-column">
-                                <input class="form-control" type="text" id="username" name="username" tabindex="1" required autofocus>
-                                <div class="invalid-feedback">
-                                    Please fill in your username
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row form-group">
-                            <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field">Password </label></div>
-                            <div class="col-sm-6 input-column">
-                                <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                                <div class="invalid-feedback">
-                                    please fill in your password
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-light submit-button tabindex="4">
-                            Login
-                        </button>
-                    </form>
-                </div>
-            </div>
+        <div class="container" style="padding-top: 31px;">
+            @yield('content')
         </div>
     </section>
     <footer class="footer text-center">
@@ -98,10 +73,15 @@
         <div class="container"><small>Copyright ©&nbsp;Brand 2018</small></div>
     </div>
     <div class="d-lg-none scroll-to-top position-fixed rounded"><a class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
+    @yield('modal')
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="{{ asset('assets/js/freelancer.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/Table-With-Search.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>
