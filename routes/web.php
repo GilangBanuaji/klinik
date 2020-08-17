@@ -46,3 +46,10 @@ Route::get('/periksaPasien', 'KlinikController@periksaPasien')->name('periksaPas
 Route::get('/doPeriksaPasien/{id}', 'KlinikController@doPeriksaPasien')->name('doPeriksaPasien');
 Route::post('/daftarPasien', 'KlinikController@daftarPasien')->name('daftarPasien');
 Route::post('/periksaUpdate/{id}', 'KlinikController@periksaUpdate')->name('periksaUpdate');
+
+//Berkas
+Route::get('/dokterBerkas', 'KlinikController@dokterBerkas')->name('dokterBerkas');
+
+//ajax
+Route::get('/periksa/getData/{id}', 'KlinikController@getData');
+Route::post('/periksaEdit', 'KlinikController@periksaEdit')->name('periksaEdit');

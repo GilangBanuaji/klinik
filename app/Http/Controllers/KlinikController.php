@@ -103,7 +103,7 @@ class KlinikController extends Controller
         $ttl = explode(",",$pasien->ttl);
 
         $pasien->tempat_lahir = $ttl[0];
-        $pasien->tanggal_lahir  = $ttl[1];
+        $pasien->tanggal_lahir  = date('Y-m-d', strtotime($ttl[1]));
 
         return view('editPasien', ['pasien' => $pasien]);
     }
@@ -152,7 +152,7 @@ class KlinikController extends Controller
     }
 
     public function periksaPasien() {
-        $rawat = Rawat::with('pasiens')->get();
+        $rawat = Rawat::with(['pasiens', 'dokter'])->get();
 
         return view('periksaPasien', ['rawats' => $rawat]);
     }
@@ -177,6 +177,7 @@ class KlinikController extends Controller
     public function periksaUpdate(Request $request, $id) {
         $periksa = Rawat::findOrFail($id);
 
+        $periksa->dokter_id = \Auth::user()->id;
         $periksa->sub_and_obj = $request->get('sub_and_obj');
         $periksa->diagnosa = $request->get('diagnosa');
         $periksa->terapi = $request->get('terapi');
@@ -185,5 +186,31 @@ class KlinikController extends Controller
         $periksa->save();
 
         return redirect()->route('periksaPasien')->with('status', 'Pasien berhasil diperiksa');
+    }
+
+    public function getData($id) {
+        $periksa = Rawat::findOrFail($id);
+
+        return $periksa;
+    }
+
+    public function periksaEdit(Request $request) {
+        $periksa = Rawat::findOrFail($request->get('periksa_id'));
+
+        $periksa->tekanan_darah = $request->get('tekanan_darah');
+        $periksa->respirasi_rate = $request->get('respirasi_rate');
+        $periksa->tinggi_badan = $request->get('tinggi_badan');
+        $periksa->nadi = $request->get('nadi');
+        $periksa->suhu = $request->get('suhu');
+        $periksa->berat_badan = $request->get('berat_badan');
+        $periksa->save();
+
+        return redirect()->back()->with('status', 'Data berhasil diubah');
+    }
+
+    public function dokterBerkas() {
+        $rawat = Rawat::where('status', 1)->with(['pasiens', 'dokter'])->get();
+
+        return view('dokterBerkas', ['rawats' => $rawat]);
     }
 }

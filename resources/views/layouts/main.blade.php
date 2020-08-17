@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Table-With-Search-1.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/Table-With-Search.css') }}">
+    <style>
+        .modal-center {
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            height: auto !important;
+        }
+    </style>
 </head>
 
 <body id="page-top">

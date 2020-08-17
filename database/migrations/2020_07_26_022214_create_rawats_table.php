@@ -16,6 +16,7 @@ class CreateRawatsTable extends Migration
         Schema::create('rawats', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('pasien_id')->unsigned();
+            $table->bigInteger('dokter_id')->unsigned()->nullable();
             $table->string('tekanan_darah', 10)->nullable();
             $table->string('respirasi_rate', 15)->nullable();
             $table->string('tinggi_badan', 10)->nullable();

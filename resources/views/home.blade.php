@@ -43,7 +43,7 @@
             </div>
             <div class="card border rounded-0" style="margin-left: 7px;"><img class="card-img-top w-100 d-block" src="assets/img/print.jpg">
                 <div class="card-body">
-                    <h4 class="card-title">CETAK BERKAS</h4><a class="btn btn-primary" role="button" href="D-print.html"><i class="fa fa-user" style="margin-right: 5px;"></i>Cetak Surat</a></div>
+                    <h4 class="card-title">CETAK BERKAS</h4><a class="btn btn-primary" role="button" href="{{ route('dokterBerkas') }}"><i class="fa fa-user" style="margin-right: 5px;"></i>Cetak Surat</a></div>
             </div>
         </div>
     @endif

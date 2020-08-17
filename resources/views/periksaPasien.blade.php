@@ -41,7 +41,7 @@
                                 <td>{{ $rawat->pasiens->fullname }}</td>
                                 <td>{{ $rawat->pasiens->ttl }}</td>
                                 <td>{{ $rawat->pasiens->alamat }}</td>
-                                <td>{{ $rawat->status == 1 ? 'Sudah Diperiksa' : 'Belum Diperiksa' }}</td>
+                                <td>{{ $rawat->status == 1 ? 'Telah diperiksa oleh ' . $rawat->dokter->full_name : 'Belum diperiksa' }}</td>
                                 <td>
                                     <a href="{{ route('doPeriksaPasien', ['id' => $rawat->id]) }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-edit" style="font-size: 15px;"></i>
