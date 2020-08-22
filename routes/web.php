@@ -49,6 +49,7 @@ Route::post('/periksaUpdate/{id}', 'KlinikController@periksaUpdate')->name('peri
 
 //Berkas
 Route::get('/dokterBerkas', 'KlinikController@dokterBerkas')->name('dokterBerkas');
+Route::post('/dokterPrint', 'KlinikController@dokterPrint')->name('dokterPrint');
 
 //ajax
 Route::get('/periksa/getData/{id}', 'KlinikController@getData');

@@ -8,6 +8,8 @@ use App\User;
 use App\Pasien;
 use App\Rawat;
 
+use PDF;
+
 class KlinikController extends Controller
 {
 
@@ -212,5 +214,50 @@ class KlinikController extends Controller
         $rawat = Rawat::where('status', 1)->with(['pasiens', 'dokter'])->get();
 
         return view('dokterBerkas', ['rawats' => $rawat]);
+    }
+
+    public function dokterPrint(Request $request) {
+
+        $data_pasien = Rawat::where('id', $request->rawat_id)->with(['pasiens', 'dokter'])->first();
+        
+        if ($request->get('tipe_surat')) {
+            $tipe_surat = 'templatesurat.suratSehat';
+            $buta_warna = $request->get('buta_warna');
+            $keperluan = $request->get('keperluan');
+            $hasil = $request->get('pernyataan_sehat');
+        }
+
+        $ttl = explode(',', $data_pasien->pasiens->ttl);
+        $tanggal_lahir = str_replace(" ","",$ttl[1]);
+        $now = date("Y-m-d");
+
+        $datetime1 = date_create($tanggal_lahir);
+        $datetime2 = date_create($now);
+
+        $diff = abs(strtotime($now) - strtotime($tanggal_lahir));
+
+        $umur = intval($diff/(365*60*60*24));
+
+        $data = [
+            'dokter_name' => $data_pasien->dokter->full_name,
+            'pasien_name' => $data_pasien->pasiens->fullname,
+            'no_rm' => $data_pasien->pasiens->no_rm,
+            'umur' => $umur,
+            'jenis_kel' => $data_pasien->pasiens->jenis_kel,
+            'pekerjaan' => $data_pasien->pasiens->pekerjaan,
+            'alamat' => $data_pasien->pasiens->alamat,
+            'tekanan_darah' => $data_pasien->tekanan_darah,
+            'berat_badan' => $data_pasien->berat_badan,
+            'tinggi_badan' => $data_pasien->tinggi_badan,
+            'buta_warna' => $buta_warna,
+            'keperluan' => $keperluan,
+            'hasil' => $hasil,
+        ];
+
+        // dd($data_pasien);
+
+        $pdf = PDF::loadView($tipe_surat, $data);
+
+        return $pdf->download('surat_sehat.pdf');
     }
 }

@@ -45,7 +45,7 @@
                                 <td>{{ $rawat->pasiens->ttl }}</td>
                                 <td>{{ $rawat->pasiens->pekerjaan }}</td>
                                 <td>
-                                    <a class="btn btn-primary text-center pull-left printSurat" role="button" data-toggle="modal" href="#" style="margin-right: 3px;background-color: rgb(139,206,122);font-size: 16px;line-height: 24px;padding-right: 10px;padding-left: 10px;">Print Surat</a>   
+                                    <a class="btn btn-primary text-center pull-left printSurat" role="button" data-id="{{ $rawat->id }}" data-toggle="modal" href="#" style="margin-right: 3px;background-color: rgb(139,206,122);font-size: 16px;line-height: 24px;padding-right: 10px;padding-left: 10px;">Print Surat</a>   
                                 </td>
                             </tr>
                         @endforeach
@@ -63,6 +63,7 @@
         });
 
         $(document).on("click",".printSurat",function(){
+            $("#rawat_id").val($(this).data('id'));
             $("#printSurat").modal('show');
         });
 
@@ -128,8 +129,8 @@
     <div class="modal fade text-left modal-center" role="dialog" tabindex="-1" id="printSurat">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="{{ route('periksaEdit') }}">
-                    <input type="hidden" name="periksa_id" id="periksa_id">
+                <form method="POST" action="{{ route('dokterPrint') }}">
+                    <input type="hidden" name="rawat_id" id="rawat_id">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Print Surat</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -142,7 +143,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Tipe Surat</label>
-                                    <select id="tipe_surat" class="form-control">
+                                    <select id="tipe_surat" name="tipe_surat" class="form-control">
                                         <option value="" disabled selected>Pilih Tipe Surat</option>
                                         <option value="1">Sehat</option>
                                         <option value="2">Sakit</option>
