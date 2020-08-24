@@ -2,10 +2,12 @@
 
 @section('content')
     <h1>Data Pasien
-        <a class="btn btn-primary pull-right" role="button" href="{{ route('addPasien') }}">
-            <i class="fa fa-user-plus" style="margin-right: 5px;"></i>
-            Tambah Pasien
-        </a>
+        @if (\Auth::user()->role != 3)
+            <a class="btn btn-primary pull-right" role="button" href="{{ route('addPasien') }}">
+                <i class="fa fa-user-plus" style="margin-right: 5px;"></i>
+                Tambah Pasien
+            </a>
+        @endif
     </h1>
     <div class="card">
         <div class="card-body">
@@ -35,7 +37,9 @@
                             <th>Riwayat Alergi Obat</th>
                             <th>Tempat Tanggal Lahir</th>
                             <th>Pekerjaan</th>
-                            <th width="15%">Action</th>
+                            @if (\Auth::user()->role != 3)
+                                <th width="15%">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -54,23 +58,25 @@
                                 <td>{{ $pasien->riwayat_alergi_obat }}</td>
                                 <td>{{ $pasien->ttl }}</td>
                                 <td>{{ $pasien->pekerjaan }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-primary daftarbutton" data-id="{{ $pasien->id }}">
-                                        <i class="fa fa-edit" style="font-size: 15px;"></i>
-                                    </a>
+                                @if (\Auth::user()->role != 3)
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-primary daftarbutton" data-id="{{ $pasien->id }}">
+                                            <i class="fa fa-edit" style="font-size: 15px;"></i>
+                                        </a>
 
-                                    <a href="{{ route('editPasien', ['id' => $pasien->id]) }}" class="btn btn-sm btn-info">
-                                        <i class="fa fa-pencil" style="font-size: 15px;"></i>
-                                    </a>
-                                    <form onsubmit="return confirm('Hapus Pasien ini?')" class="d-inline" action="{{ route('deletePasien', ['id' => $pasien->id]) }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="_method" value="DELETE">
-    
-                                        <button class="btn btn-danger btn-sm" style="margin-left: 5px;" type="submit">
-                                            <i class="fa fa-trash" style="font-size: 15px;"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                        <a href="{{ route('editPasien', ['id' => $pasien->id]) }}" class="btn btn-sm btn-info">
+                                            <i class="fa fa-pencil" style="font-size: 15px;"></i>
+                                        </a>
+                                        <form onsubmit="return confirm('Hapus Pasien ini?')" class="d-inline" action="{{ route('deletePasien', ['id' => $pasien->id]) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+        
+                                            <button class="btn btn-danger btn-sm" style="margin-left: 5px;" type="submit">
+                                                <i class="fa fa-trash" style="font-size: 15px;"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

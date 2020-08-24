@@ -33,7 +33,7 @@
             <div class="card border rounded-0"><img class="card-img-top w-100 d-block" src="assets/img/RawatJalan.jpg">
                 <div class="card-body">
                     <h4 class="text-center card-title">Rawat Jalan</h4>
-                    <a class="btn btn-primary" role="button" href="D-bioPsn-1.html">
+                    <a class="btn btn-primary" role="button" href="{{ route('pasienIndex') }}">
                         <i class="fa fa-user" style="margin-right: 5px;"></i>Data Pasien
                     </a>
                     <a class="btn btn-primary" role="button" href="{{ route('periksaPasien') }}" style="margin-left: 5px;">

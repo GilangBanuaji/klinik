@@ -190,6 +190,12 @@ class KlinikController extends Controller
         return redirect()->route('periksaPasien')->with('status', 'Pasien berhasil diperiksa');
     }
 
+    public function riwayatPasien($id) {
+        $pasien = Rawat::where([['pasien_id', $id], ['status', '1']])->with(['dokter', 'pasiens'])->get();
+
+        return view('riwayatPasien', ['pasiens' => $pasien]);
+    }
+
     public function getData($id) {
         $periksa = Rawat::findOrFail($id);
 
