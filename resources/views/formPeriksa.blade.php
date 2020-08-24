@@ -21,7 +21,7 @@
         @endif
         <div class="card-body">
             <div class="container" style="padding-top: 31px;">
-                <div><a class="btn btn-primary btn-lg pull-right" href="{{ route('riwayatPasien', ['id' => $periksa->id]) }}">Riwayat</a></div>
+                <div><a class="btn btn-primary btn-lg pull-right" href="{{ route('riwayatPasien', ['id' => $periksa->pasien_id]) }}">Riwayat</a></div>
                 <h1 class="text-center">Form Periksa</h1>
             </div>
             <div class="container">
