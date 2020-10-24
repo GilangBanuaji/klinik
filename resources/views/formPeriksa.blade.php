@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        if ($periksa->status == 1) {
+        if ($periksa->status == 1 && Auth::user()->role != '1') {
             $status = 'disabled';
         } else {
             $status = '';
@@ -21,7 +21,8 @@
         @endif
         <div class="card-body">
             <div class="container" style="padding-top: 31px;">
-                <div><a class="btn btn-primary btn-lg pull-right" href="{{ route('riwayatPasien', ['id' => $periksa->pasien_id]) }}">Riwayat</a></div>
+                <div><a style=" margin:5px;" class="btn btn-primary btn-lg pull-right" target="_blank" href="{{ route('riwayatPasien', ['id' => $periksa->pasien_id]) }}">Riwayat</a></div>
+                <div><a style="margin:5px;" class="btn btn-secondary btn-lg {{ $status }} editbutton pull-right" data-id="{{ $periksa->id }}" role="button" data-toggle="modal" href="#" style="margin-bottom: 10px; padding-left:10px; padding-right:10px">Edit</a></div>
                 <h1 class="text-center">Form Periksa</h1>
             </div>
             <div class="container">
@@ -35,19 +36,18 @@
                                     <div class="col"><span>Umur :&nbsp;</span><span>{{ $periksa->umur }} Tahun</span></div>
                                 </div>
                                 <div class="form-row" style="margin-bottom: 5px;">
-                                    <div class="col"><span>Tekanan Darah :&nbsp;</span><span>{{ $periksa->tekanan_darah }}mm</span></div>
-                                    <div class="col"><span>Tekanan Nadi:&nbsp;</span><span>{{ $periksa->nadi }}/menit</span></div>
-                                    <div class="col"><span>Respirasi Rate :&nbsp;</span><span>{{ $periksa->respirasi_rate }}</span></div>
+                                    <div class="col"><span>Tekanan Darah :&nbsp;</span><span>{{ $periksa->tekanan_darah }} mmHg</span></div>
+                                    <div class="col"><span>Tekanan Nadi:&nbsp;</span><span>{{ $periksa->nadi }} / Menit</span></div>
+                                    <div class="col"><span>Respirasi Rate :&nbsp;</span><span>{{ $periksa->respirasi_rate }} / Menit</span></div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col"><span>Suhu :&nbsp;</span><span>{{ $periksa->suhu }}C</span></div>
-                                    <div class="col"><span>Tinggi Badan :&nbsp;</span><span>{{ $periksa->tinggi_badan }}cm</span></div>
-                                    <div class="col"><span>Berat Badan :&nbsp;</span><span>{{ $periksa->berat_badan }}kg</span></div>
+                                    <div class="col"><span>Suhu :&nbsp;</span><span>{{ $periksa->suhu }} C</span></div>
+                                    <div class="col"><span>Tinggi Badan :&nbsp;</span><span>{{ $periksa->tinggi_badan }} CM</span></div>
+                                    <div class="col"><span>Berat Badan :&nbsp;</span><span>{{ $periksa->berat_badan }} Kg</span></div>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <div><a class="btn btn-secondary btn-sm {{ $status }} editbutton" data-id="{{ $periksa->id }}" role="button" data-toggle="modal" href="#" style="margin-bottom: 10px; padding-left:10px; padding-right:10px">Edit</a></div>
                 </div>
             </div>
             <form method="POST" action="{{ route('periksaUpdate', ['id' => $periksa->id]) }}">

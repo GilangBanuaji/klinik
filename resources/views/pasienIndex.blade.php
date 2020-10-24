@@ -38,7 +38,7 @@
                             <th>Tempat Tanggal Lahir</th>
                             <th>Pekerjaan</th>
                             @if (\Auth::user()->role != 3)
-                                <th width="15%">Action</th>
+                                <th width="20%">Action</th>
                             @endif
                         </tr>
                     </thead>
@@ -61,11 +61,11 @@
                                 @if (\Auth::user()->role != 3)
                                     <td>
                                         <a href="#" class="btn btn-sm btn-primary daftarbutton" data-id="{{ $pasien->id }}">
-                                            <i class="fa fa-edit" style="font-size: 15px;"></i>
+                                            <i class="fa fa-edit" style="font-size: 15px;"></i> Daftar
                                         </a>
 
                                         <a href="{{ route('editPasien', ['id' => $pasien->id]) }}" class="btn btn-sm btn-info">
-                                            <i class="fa fa-pencil" style="font-size: 15px;"></i>
+                                            <i class="fa fa-pencil" style="font-size: 15px;"></i> Edit
                                         </a>
                                         <form onsubmit="return confirm('Hapus Pasien ini?')" class="d-inline" action="{{ route('deletePasien', ['id' => $pasien->id]) }}" method="POST">
                                             @csrf

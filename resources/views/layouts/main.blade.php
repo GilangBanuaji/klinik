@@ -52,6 +52,9 @@
     </nav>
     <section id="portfolio" class="portfolio">
         <div class="container" style="padding-top: 31px;">
+            <div class="alert alert-success" style="margin:15px;">
+                Selamat Datang <strong>{{ Auth::user()->full_name }}</strong>
+            </div>
             @yield('content')
         </div>
     </section>

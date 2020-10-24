@@ -154,7 +154,7 @@ class KlinikController extends Controller
     }
 
     public function periksaPasien() {
-        $rawat = Rawat::with(['pasiens', 'dokter'])->get();
+        $rawat = Rawat::with(['pasiens', 'dokter'])->orderBy('status', 'ASC')->orderBy('created_at', 'ASC')->get();
 
         return view('periksaPasien', ['rawats' => $rawat]);
     }

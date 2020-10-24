@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-block btn-primary">Simpan</button>
-                <a href="{{ route('userIndex') }}" class="btn btn-lg btn-block btn-secondary">Batal</a>
+                <a href="{{ route('pasienIndex') }}" class="btn btn-lg btn-block btn-secondary">Batal</a>
             </form>
         </div>
     </div>
