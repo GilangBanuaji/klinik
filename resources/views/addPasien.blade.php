@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="no_rm">Nomor Rekam Medis</label>
-                            <input type="text" name="no_rm" class="form-control" placeholder="Nomor Rekam Medis" required/>
+                            <input type="text" name="no_rm" class="form-control" value="RM{{ $noRM }}" placeholder="Nomor Rekam Medis" required readonly/>
                         </div>
                         <div class="form-group">
                             <label for="jenis_kel">Jenis Kelamin</label>

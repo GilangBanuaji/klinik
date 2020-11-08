@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Helpers\SettingOption as Option;
+
 use App\User;
 use App\Pasien;
 use App\Rawat;
@@ -80,7 +82,15 @@ class KlinikController extends Controller
     }
 
     public function addPasien() {
-        return view('addPasien');
+        $noRm = Option::instance()->getOptionVal('no_rm');
+        $range = Option::instance()->getOptionVal('digrm');
+
+        $numVal = intVal($noRm->setting_value) + 1;
+        $numRange = intVal($range->setting_value);
+
+        $noRm = str_pad($numVal, $numRange, '0', STR_PAD_LEFT);
+
+        return view('addPasien', ['noRM' => $noRm]);
     }
 
     public function savePasien(Request $request) {
@@ -95,6 +105,8 @@ class KlinikController extends Controller
         $pasien->ttl = $request->get('tempat_lahir').', '.$request->get('tanggal_lahir');
         $pasien->pekerjaan = $request->get('pekerjaan');
         $pasien->save();
+
+        $updateNoRM = Option::instance()->updateOptionVal('no_rm');
 
         return redirect()->route('pasienIndex')->with('status', 'Pasien berhasil ditambah');
     }

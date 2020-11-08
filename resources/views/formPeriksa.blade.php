@@ -20,7 +20,7 @@
             </div>
         @endif
         <div class="card-body">
-            <div class="container" style="padding-top: 31px;">
+            <div class="container" style="padding-top: 31px; padding-bottom: 30px;">
                 <div><a style=" margin:5px;" class="btn btn-primary btn-lg pull-right" target="_blank" href="{{ route('riwayatPasien', ['id' => $periksa->pasien_id]) }}">Riwayat</a></div>
                 <div><a style="margin:5px;" class="btn btn-secondary btn-lg {{ $status }} editbutton pull-right" data-id="{{ $periksa->id }}" role="button" data-toggle="modal" href="#" style="margin-bottom: 10px; padding-left:10px; padding-right:10px">Edit</a></div>
                 <h1 class="text-center">Form Periksa</h1>
