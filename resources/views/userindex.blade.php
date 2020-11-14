@@ -41,7 +41,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->username }}</td>
-                                <td>{{ $user->role == '1' ? 'Super Admin' : ($user->rol == '2' ? 'Petugas' : 'Dokter') }}</td>
+                                <td>{{ $user->role == '1' ? 'Super Admin' : ($user->role == '2' ? 'Petugas' : 'Dokter') }}</td>
                                 <td>
                                     <a href="{{ route('editUser', ['id' => $user->id]) }}" class="btn btn-sm btn-info {{ $user->role == Auth::user()->role ? "disabled" : "" }}">
                                         <i class="fa fa-pencil" style="font-size: 15px;"></i>
